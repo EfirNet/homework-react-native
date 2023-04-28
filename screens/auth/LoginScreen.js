@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
 import {
   View,
   TextInput,
@@ -12,25 +10,21 @@ import {
   KeyboardAvoidingView,
   ImageBackground,
   Platform,
-  Dimensions,
-  Image,
 } from "react-native";
 
-const RegistrationScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
+  console.log("navigation:", navigation);
   console.log(Platform.OS);
   const initialState = {
-    username: "",
     email: "",
     password: "",
   };
 
   const initialStateFocus = {
-    username: false,
     email: false,
     password: false,
   };
 
-  const [avatar, setAvatar] = useState(true);
   const [showPassword, setShowPassword] = useState(true);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -75,7 +69,6 @@ const RegistrationScreen = ({ navigation }) => {
   const handleSubmit = () => {
     console.log("Form data:", state);
     setState({
-      username: "",
       email: "",
       password: "",
     });
@@ -85,10 +78,9 @@ const RegistrationScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
         resizeMode="cover"
-        source={require("../assets/img/bg.jpg")}
+        source={require("../../assets/img/bg.jpg")}
         style={styles.background}
       >
-        <StatusBar style="auto" />
         <View style={styles.parentContainer}>
           {/* <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -97,64 +89,11 @@ const RegistrationScreen = ({ navigation }) => {
           <View
             style={{
               ...styles.form,
-              paddingBottom: isShowKeyboard ? 16 : 78,
+              paddingBottom: isShowKeyboard ? 16 : 144,
             }}
           >
-            <View style={styles.avatar}>
-              {avatar ? (
-                <>
-                  <Image
-                    style={styles.avatarImage}
-                    source={require("../assets/img/avatar.jpg")}
-                  />
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    style={styles.iconBlock}
-                    onPress={() => setAvatar(false)}
-                  >
-                    <Ionicons
-                      style={styles.closeIcon}
-                      name="md-close-circle-outline"
-                      size={25}
-                      color="#E8E8E8"
-                    />
-                  </TouchableOpacity>
-                </>
-              ) : (
-                <TouchableOpacity
-                  style={styles.iconBlock}
-                  activeOpacity={0.8}
-                  onPress={() => setAvatar(true)}
-                >
-                  <Ionicons
-                    style={styles.addIcon}
-                    name="md-add-circle-outline"
-                    size={25}
-                    color="#FF6C00"
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
+            <Text style={styles.h2}>Войти</Text>
 
-            <Text style={styles.h2}>Регистрация</Text>
-            <TextInput
-              style={{
-                ...styles.input,
-                borderColor: isFocused.username ? "#FF6C00" : "#E8E8E8",
-                backgroundColor: isFocused.username ? "#fff" : "#F6F6F6",
-              }}
-              placeholder="Логин"
-              value={state.username}
-              onChangeText={(value) =>
-                setState((prevState) => ({ ...prevState, username: value }))
-              }
-              onFocus={() => {
-                handleInputFocus("username");
-              }}
-              onBlur={() => {
-                handleInputBlur("username");
-              }}
-            />
             <TextInput
               style={{
                 ...styles.input,
@@ -213,12 +152,14 @@ const RegistrationScreen = ({ navigation }) => {
                   onPress={handleSubmit}
                   activeOpacity={0.8}
                 >
-                  <Text style={styles.buttonText}>Зарегистрироваться</Text>
+                  <Text style={styles.buttonText}>Войти</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("LoginScreen")}
+                  onPress={() => navigation.navigate("Registration")}
                 >
-                  <Text style={styles.linkText}>Уже есть аккаунт? Войти</Text>
+                  <Text style={styles.linkText}>
+                    Нет аккаунта? Зарегистрироваться
+                  </Text>
                 </TouchableOpacity>
               </>
             )}
@@ -233,11 +174,9 @@ const RegistrationScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   keyContainer: {
     flex: 1,
-    // width: "100%",
   },
   background: {
     flex: 1,
-    // width: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -246,30 +185,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  avatar: {
-    position: "absolute",
-    top: -60,
-    left: Dimensions.get("window").width / 2 - 60,
-    width: 120,
-    height: 120,
-    borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-    zIndex: 1,
-  },
-  avatarImage: {
-    borderRadius: 16,
-  },
-  closeIcon: {
-    position: "absolute",
-    right: -13.5,
-    bottom: 9,
-    zIndex: 2,
-  },
-  addIcon: {
-    top: 84,
-    left: 108,
-    zIndex: 2,
-  },
+
   form: {
     position: "absolute",
     bottom: 0,
@@ -279,7 +195,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 92,
+    paddingTop: 32,
     paddingHorizontal: 16,
     backgroundColor: "#fff",
     borderTopLeftRadius: 25,
@@ -293,9 +209,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 16,
     paddingVertical: 15,
-    // backgroundColor: "#F6F6F6",
     borderWidth: 1,
-    // borderColor: "#E8E8E8",
     borderRadius: 8,
     fontFamily: "Roboto-Regular",
     color: "#000",
@@ -357,4 +271,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegistrationScreen;
+export default LoginScreen;
