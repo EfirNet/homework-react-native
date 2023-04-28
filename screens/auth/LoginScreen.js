@@ -101,6 +101,7 @@ const LoginScreen = ({ navigation }) => {
                 backgroundColor: isFocused.email ? "#fff" : "#F6F6F6",
               }}
               placeholder="Адрес электронной почты"
+              placeholderTextColor="#BDBDBD"
               value={state.email}
               onChangeText={(value) =>
                 setState((prevState) => ({ ...prevState, email: value }))
@@ -123,6 +124,7 @@ const LoginScreen = ({ navigation }) => {
                   backgroundColor: isFocused.password ? "#fff" : "#F6F6F6",
                 }}
                 placeholder="Пароль"
+                placeholderTextColor="#BDBDBD"
                 value={state.password}
                 onChangeText={(value) =>
                   setState((prevState) => ({ ...prevState, password: value }))
@@ -213,7 +215,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontFamily: "Roboto-Regular",
     color: "#000",
-    placeholderTextColor: "#BDBDBD",
+
     fontSize: 16,
   },
   h2: {
